@@ -1,10 +1,24 @@
 // Assignment code here
 var generatePassword = function() {
-  var paswordLength = window.prompt("Password Length:\nEnter a Value Between 8 and 128");
+  var passwordLength = window.prompt("Password Length:\nEnter a Value Between 8 and 128");
 
   if (!generatePassword) {
     return;
   }
+
+  if (passwordLength < 8 && passwordLength > 128) {
+     
+  } else if (passwordLength < 8 || passwordLength > 128) {
+    window.alert("Please Enter a Value Between 8 and 128")
+  }
+
+  var upCase = window.confirm("Add Upper Case Characters?");
+
+  var lowCase = window.confirm("Add Lower Case Characters?");
+
+  var numVal = window.confirm("Add Numbers?");
+
+  var spChar = window.confirm("Add Speacial Characters?");
 }
 
 // Get references to the #generate element
