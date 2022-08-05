@@ -1,20 +1,28 @@
-// Assignment code here
-var charOptions = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz","0123456789","!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"];
+//Character Options for building password
+var charOpt = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var charOpt1 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "w", "x", "y", "z"];
+var charOpt2 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var charOpt3 = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "^", "_", "{", "|", "}", "~"];
 
-var generatePassword = function() {
+//Default return value for base password
+var retVal = ""
+
+//Function for generating password
+var generatePassword = function () {
+  //Sets Password Length
   var passwordLength = window.prompt("Password Length:\nEnter a Value Between 8 and 128");
 
-  if (!generatePassword) {
+  if (!passwordLength) {
     return;
   }
 
-  if (passwordLength < 8 && passwordLength > 128) {
-     
-  } else if (passwordLength < 8 || passwordLength > 128) {
+  if (passwordLength < 8 || passwordLength > 128) {
     window.alert("Please Enter a Value Between 8 and 128");
     return;
   }
+  console.log(passwordLength);
 
+  //Sets Password Paramaters
   var upCase = window.confirm("Add Upper Case Characters?");
 
   var lowCase = window.confirm("Add Lower Case Characters?");
@@ -22,42 +30,50 @@ var generatePassword = function() {
   var numVal = window.confirm("Add Numbers?");
 
   var spChar = window.confirm("Add Special Characters? \ne.g. !$@#&...");
-  
+
   if (upCase && lowCase && numVal && spChar) {
-    var characters = (charOptions);
-  } else if (upCase && lowCase && numVal && spChar === false) {
-    var characters = (charOptions[0] + charOptions[1] + charOptions[2]);
-  } else if (upCase && lowCase && numVal === false && spChar === false) {
-    var characters = (charOptions[0] + charOptions[1]);
-  } else if (upCase && lowCase === false && numVal === false && spChar === false) {
-    var characters = (charOptions[0]);
-  } else if (upCase === false && lowCase && numVal && spChar === false) {
-    var characters = (charOptions[1] + charOptions[2]);
-  } else if (upCase === false && lowCase === false && numVal === false && spChar) {
-    var characters = (charOptions[3]);
-  } else if (upCase === false && lowCase === false && numVal && spChar === false) {
-    var characters = (charOptions[2]);
-  } else if (upCase === false && lowCase && numVal === false && spChar === false) {
-    var characters = (charOptions[1]);
-  } else if (upCase === false && lowCase && numVal && spChar) {
-    var characters = (charOptions[1] + charOptions[2] + charOptions[3]);
-  } else if (upCase === false && lowCase === false && numVal && spChar) {
-    var characters = (charOptions[2] + charOptions[3]);
-  } else if (upCase === false && lowCase && numVal === false && spChar) {
-    var characters = (charOptions[1] + charOptions[3]);
-  } else if (upCase && lowCase === false && numVal && spChar === false) {
-    var characters = (charOptions[0] + charOptions[2]);
-  } else if (upCase && lowCase === false && numVal === false && spChar) {
-    var characters = (charOptions[0] + charOptions[3]);
+    var charset = (charOpt);
+  } else if (upCase && lowCase && numVal && !spChar) {
+    var charset = (charOpt + charOpt1 + charOpt2);
+  } else if (upCase && lowCase && !numVal && !spChar) {
+    var charset = (charOpt + charOpt1);
+  } else if (upCase && !lowCase && !numVal && !spChar) {
+    var charset = (charOpt);
+  } else if (!upCase && lowCase && numVal && !spChar) {
+    var charset = (charOpt1 + charOpt2);
+  } else if (!upCase && !lowCase && !numVal && spChar) {
+    var charset = (charOpt3);
+  } else if (!upCase && !lowCase && numVal && !spChar) {
+    var charset = (charOpt2);
+  } else if (!upCase && lowCase && !numVal && !spChar) {
+    var charset = (charOpt1);
+  } else if (!upCase && lowCase && numVal && spChar) {
+    var charset = (charOpt1 + charOpt2 + charOpt3);
+  } else if (!upCase && !lowCase && numVal && spChar) {
+    var charset = (charOpt2 + charOpt3);
+  } else if (!upCase && lowCase && !numVal && spChar) {
+    var charset = (charOpt1 + charOpt3);
+  } else if (upCase && !lowCase && numVal && !spChar) {
+    var charset = (charOpt + charOpt2);
+  } else if (upCase && !lowCase && !numVal && spChar) {
+    var charset = (charOpt + charOpt3);
   } else {
     return;
+  
   }
+  console.log(charset);
 
-  for(var i= 0; i = passwordLength; i++) {
-    var characters[i];
-    console.log(characters[i]);
+
+  //Generates password
+  for (var i = 0; i < passwordLength; i++) {
+    var index = charset[Math.floor(Math.random() * charset.length)]
+    retVal += index;
   }
+  return retVal;
+
 }
+
+console.log(retVal);
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -67,7 +83,7 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  passwordText.innerHTML = password;
 
 }
 
