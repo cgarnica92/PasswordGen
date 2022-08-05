@@ -24,7 +24,7 @@ var generatePassword = function () {
 
   //Sets Password Paramaters
   var upCase = window.confirm("Add Upper Case Characters?");
-
+    
   var lowCase = window.confirm("Add Lower Case Characters?");
 
   var numVal = window.confirm("Add Numbers?");
